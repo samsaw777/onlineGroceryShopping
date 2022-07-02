@@ -3,21 +3,25 @@ const groceryItemsList = [
   {
     itemName: "Milk",
     price: 200,
+    itemQuantity: 1,
     url: "Images/milk.png",
   },
   {
     itemName: "Grap",
     price: 200,
+    itemQuantity: 1,
     url: "Images/graps.png",
   },
   {
     itemName: "Apple",
     price: 200,
+    itemQuantity: 1,
     url: "Images/apple.png",
   },
   {
     itemName: "Butter",
     price: 200,
+    itemQuantity: 1,
     url: "Images/butter.png",
   },
 ];
@@ -37,7 +41,7 @@ const displayGroceryItems = () => {
         <div class="flex gap-4 justify-between px-10 pb-5">
         <div class="flex justify-between gap-4 px-5 items-center">
             <button class="decrementButton px-4 font-bold py-1 bg-gray-100">-</button>
-            <div>1</div>
+            <div>${item.itemQuantity}</div>
             <button class="incrementButton px-4 font-bold py-1 bg-gray-100">+</button>
         </div>
         <button class="px-5 py-3 bg-yellow-100"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -47,21 +51,61 @@ const displayGroceryItems = () => {
       </div>`;
   });
 
-  //increment function.
-  function increment(count) {
-    count++;
-    return count;
+  //increment quantity function.
+  function incrementQuantity(quantity) {
+    quantity++;
+    return quantity;
   }
 
-  const itemName = document.getElementsByClassName("itemName");
-  //   console.log(itemName);
+  //decrement quantity function.
+  function decrementQuantity(quantity) {
+    quantity--;
+    return quantity;
+  }
 
-  for (let item = 0; item < itemName.length; item++) {
-    itemName[item].addEventListener("click", () => {
-      const quantity = increment(
-        parseInt(itemName[item].previousElementSibling.textContent)
+  const incrementQuantityButton =
+    document.getElementsByClassName("incrementButton");
+
+  const decrementQuantityButton =
+    document.getElementsByClassName("decrementButton");
+
+  //looping through the increment buttons in the API.
+  for (
+    let quantity = 0;
+    quantity < incrementQuantityButton.length;
+    quantity++
+  ) {
+    incrementQuantityButton[quantity].addEventListener("click", () => {
+      const modifiedQuantity = incrementQuantity(
+        parseInt(
+          incrementQuantityButton[quantity].previousElementSibling.textContent
+        )
       );
-      itemName[item].previousElementSibling.textContent = quantity;
+      incrementQuantityButton[quantity].previousElementSibling.textContent =
+        modifiedQuantity;
+    });
+  }
+
+  //looping through the decrement buttons in the API.
+  for (
+    let quantityDec = 0;
+    quantityDec < decrementQuantityButton.length;
+    quantityDec++
+  ) {
+    decrementQuantityButton[quantityDec].addEventListener("click", () => {
+      const modifiedQuantity = decrementQuantity(
+        parseInt(
+          decrementQuantityButton[quantityDec].nextElementSibling.textContent
+        )
+      );
+
+      //check if the quantity is not less than equal to 0.
+      if (modifiedQuantity <= 0) {
+        decrementQuantityButton[quantityDec].nextElementSibling.textContent = 1;
+      } else {
+        decrementQuantityButton[quantityDec].nextElementSibling.textContent =
+          modifiedQuantity;
+      }
     });
   }
 };
