@@ -28,15 +28,40 @@ const groceryItems = document.getElementById("groceryItems");
 // display the list on the load up.
 const displayGroceryItems = () => {
   groceryItemsList.forEach((item, index) => {
-    groceryItems.innerHTML += `<div class="itemName">${item.itemName}</div>`;
+    groceryItems.innerHTML += `<div class="flex flex-col broder border-2 border-gray-200">
+        <img src="${item.url}" class="object-fit h-72 w-full p-10 bg-gray-200"/>
+        <div class="flex flex-col gap-2 items-center py-5">
+            <div class="text-2xl font-bold">${item.itemName}</div>
+            <div class="text-green-500 font-bold text-xl">Rs. ${item.price}</div>
+        </div>
+        <div class="flex gap-4 justify-between px-10 pb-5">
+        <div class="flex justify-between gap-4 px-5 items-center">
+            <button class="decrementButton px-4 font-bold py-1 bg-gray-100">-</button>
+            <div>1</div>
+            <button class="incrementButton px-4 font-bold py-1 bg-gray-100">+</button>
+        </div>
+        <button class="px-5 py-3 bg-yellow-100"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+            </svg></button>
+        </div>
+      </div>`;
   });
+
+  //increment function.
+  function increment(count) {
+    count++;
+    return count;
+  }
 
   const itemName = document.getElementsByClassName("itemName");
   //   console.log(itemName);
 
   for (let item = 0; item < itemName.length; item++) {
     itemName[item].addEventListener("click", () => {
-      console.log(`clicked ${item}th element!`);
+      const quantity = increment(
+        parseInt(itemName[item].previousElementSibling.textContent)
+      );
+      itemName[item].previousElementSibling.textContent = quantity;
     });
   }
 };
