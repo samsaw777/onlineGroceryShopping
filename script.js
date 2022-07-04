@@ -26,6 +26,21 @@ const groceryItemsList = [
   },
 ];
 
+// Sidebar code here.
+// function Openbar() {
+//   document.querySelector(".sidebar").classList.toggle("left-[-300px]");
+// }
+
+// Toggle sidebar.
+// document.getElementById("sideBarToggle").addEventListener("clicl", () => {
+//   console.log("Hello");
+// });
+
+const sideBarButton = document.getElementById("sideBarToggle");
+sideBarButton.addEventListener("click", () => {
+  document.querySelector(".sidebar").classList.toggle("left-[-300px]");
+});
+
 // get the elements using ID.
 const groceryItems = document.getElementById("groceryItems");
 
