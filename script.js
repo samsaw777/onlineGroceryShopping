@@ -36,10 +36,10 @@ const groceryItemsList = [
 //   console.log("Hello");
 // });
 
-const sideBarButton = document.getElementById("sideBarToggle");
-sideBarButton.addEventListener("click", () => {
-  document.querySelector(".sidebar").classList.toggle("left-[-300px]");
-});
+// const sideBarButton = document.getElementById("sideBarToggle");
+// sideBarButton.addEventListener("click", () => {
+//   document.querySelector(".sidebar").classList.toggle("left-[-300px]");
+// });
 
 // get the elements using ID.
 const groceryItems = document.getElementById("groceryItems");

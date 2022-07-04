@@ -4,12 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Grocery List</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div>
-      <div class="px-5 lg:px-20 py-5 bg-gray-200 flex justify-between">
+    <div class="h-screen overflow-y-scroll">
+      <div
+        class="px-5 lg:px-20 py-5 bg-gray-200 flex justify-between fixed w-full"
+      >
         <div class="text-4xl font-bold text-orange-400">SSMart</div>
         <div class="flex">
           <svg
@@ -34,8 +38,40 @@
           </div>
         </div>
       </div>
-      <div class="sidebar fixed top-[80px] bottom-0 lg:left-0  duration-1000 p-2 w-[600px] overflow-y-auto text-center bg-gray-900 shadow h-screen""></div>
-      <div class="mx-5 lg:mx-20">
+      <!-- Sdebar Code -->
+      <div class="w-0 h-full shadow-md bg-white px-1 right-0 fixed top-20">
+        <ul class="relative">
+          <li class="relative">
+            <a
+              class="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
+              href="#!"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="dark"
+              >Sidenav link 1</a
+            >
+          </li>
+          <li class="relative">
+            <a
+              class="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
+              href="#!"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="dark"
+              >Sidenav link 2</a
+            >
+          </li>
+          <li class="relative">
+            <a
+              class="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out"
+              href="#!"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="dark"
+              >Sidenav link 2</a
+            >
+          </li>
+        </ul>
+      </div>
+      <!-- <div class="sidebar fixed top-[80px] bottom-0 lg:left-0  duration-1000 p-2 w-[600px] overflow-y-auto text-center bg-gray-900 shadow h-screen""></div> -->
+      <div class="mx-5 lg:mx-20 mt-24">
         <div
           id="groceryItems"
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mt-10"
