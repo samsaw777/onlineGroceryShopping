@@ -8,23 +8,33 @@ const groceryItemsList = [
   },
   {
     itemName: "Grap",
-    price: 200,
+    price: 300,
     itemQuantity: 1,
     url: "Images/graps.png",
   },
   {
     itemName: "Apple",
-    price: 200,
+    price: 100,
     itemQuantity: 1,
     url: "Images/apple.png",
   },
   {
     itemName: "Butter",
-    price: 200,
+    price: 900,
     itemQuantity: 1,
     url: "Images/butter.png",
   },
 ];
+
+//creating the cart items class.
+class CartItems {
+  constructor(itemImage, itemName, itemPrice, itemQuantity) {
+    this.itemImage = itemImage;
+    this.itemName = itemName;
+    this.itemPrice = itemPrice;
+    this.itemQuantity = itemQuantity;
+  }
+}
 
 // get the elements using ID.
 const groceryItems = document.getElementById("groceryItems");
@@ -43,7 +53,7 @@ const displayGroceryItems = () => {
         <img src="${item.url}" class="object-fit h-72 w-full p-10 bg-gray-200"/>
         <div class="flex flex-col gap-2 items-center py-5">
             <div class="text-2xl font-bold">${item.itemName}</div>
-            <div class="text-green-500 font-bold text-xl">Rs. ${item.price}</div>
+            <div class="text-green-500 font-bold text-xl price">Rs. ${item.price}</div>
         </div>
         <div class="flex gap-4 justify-between px-10 pb-5">
         <div class="flex justify-between gap-4 px-5 items-center">
