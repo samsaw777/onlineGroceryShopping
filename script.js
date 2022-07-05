@@ -52,16 +52,16 @@ const displayGroceryItems = () => {
     groceryItems.innerHTML += `<div class="flex flex-col broder border-2 border-gray-200">
         <img src="${item.url}" class="object-fit h-72 w-full p-10 bg-gray-200"/>
         <div class="flex flex-col gap-2 items-center py-5">
-            <div class="text-2xl font-bold">${item.itemName}</div>
+            <div class="text-2xl font-bold name">${item.itemName}</div>
             <div class="text-green-500 font-bold text-xl price">Rs. ${item.price}</div>
         </div>
         <div class="flex gap-4 justify-between px-10 pb-5">
         <div class="flex justify-between gap-4 px-5 items-center">
             <button class="decrementButton px-4 font-bold py-1 bg-gray-100">-</button>
-            <div>${item.itemQuantity}</div>
+            <div class="quantity">${item.itemQuantity}</div>
             <button class="incrementButton px-4 font-bold py-1 bg-gray-100">+</button>
         </div>
-        <button class="px-5 py-3 bg-yellow-100"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <button class="px-5 py-3 bg-yellow-100 addToCartButton"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
             <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
             </svg></button>
         </div>
@@ -85,6 +85,11 @@ const displayGroceryItems = () => {
 
   const decrementQuantityButton =
     document.getElementsByClassName("decrementButton");
+
+  const addToCartButton = document.getElementsByClassName("addToCartButton");
+  const itemPrice = document.getElementsByClassName("price");
+  const itemName = document.getElementsByClassName("name");
+  const itemQuantity = document.getElementsByClassName("quantity");
 
   //looping through the increment buttons in the API.
   for (
@@ -123,6 +128,19 @@ const displayGroceryItems = () => {
         decrementQuantityButton[quantityDec].nextElementSibling.textContent =
           modifiedQuantity;
       }
+    });
+  }
+
+  //adding items to the carts.
+  for (let addToCart = 0; addToCart < addToCartButton.length; addToCart++) {
+    addToCartButton[addToCart].addEventListener("click", () => {
+      const name = itemName[addToCart].textContent;
+      const quantity = itemQuantity[addToCart].textContent;
+      const price = parseInt(
+        itemPrice[addToCart].textContent.replace("Rs.", "")
+      );
+
+      console.log(name, price, quantity);
     });
   }
 };
