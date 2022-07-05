@@ -23,7 +23,7 @@
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth="{2}"
-            id="sideBarToggle"
+            id="cartToggleButton"
           >
             <path
               strokeLinecap="round"
@@ -39,7 +39,10 @@
         </div>
       </div>
       <!-- Sdebar Code -->
-      <div class="w-0 h-full shadow-md bg-white px-1 right-0 fixed top-20">
+      <div
+        class="w-full lg:w-1/2 h-full shadow-md bg-white px-1 right-0 fixed top-20 hidden"
+        id="cartDisplay"
+      >
         <ul class="relative">
           <li class="relative">
             <a
