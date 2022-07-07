@@ -26,6 +26,10 @@ const groceryItemsList = [
   },
 ];
 
+const cartDisplaySection = document.getElementById("cartDisplay");
+const itemsCount = document.getElementById("cartItemsLength");
+const itemsCountValue = parseInt(itemsCount.textContent);
+
 //creating the cart items class.
 class CartItems {
   constructor(itemImage, itemName, itemPrice, itemQuantity) {
@@ -33,6 +37,38 @@ class CartItems {
     this.itemName = itemName;
     this.itemPrice = itemPrice;
     this.itemQuantity = itemQuantity;
+  }
+}
+
+// UI class to handle the UI components in the application.
+class UI {
+  static displayCartItems() {
+    const cartItems = LocalStorage.getCartItems();
+
+    itemsCount.innerHTML = cartItems.length;
+
+    cartItems.forEach((item) => {
+      UI.displayCartItemsInUI(item);
+    });
+  }
+
+  static displayCartItemsInUI(cartItem) {
+    // Create a div element.
+    const div = document.createElement("div");
+
+    div.innerHTML = `
+      <div class="flex gap-3">
+        <img src="${
+          cartItem.itemImage
+        }" class="h-[100px] w-[100px] object-fit" />
+        <div>
+          <div>${cartItem.itemName}</div>
+          <div>${cartItem.itemPrice * cartItem.itemQuantity}</div>
+        </div>
+      </div>
+    `;
+
+    cartDisplaySection.appendChild(div);
   }
 }
 
@@ -45,7 +81,7 @@ class LocalStorage {
     if (localStorage.getItem("cartItems") == null) {
       items = [];
     } else {
-      items = JSON.parse(localStorage.getItems("cartItems"));
+      items = JSON.parse(localStorage.getItem("cartItems"));
     }
 
     return items;
@@ -63,12 +99,14 @@ class LocalStorage {
 // get the elements using ID.
 const groceryItems = document.getElementById("groceryItems");
 const cartButton = document.getElementById("cartToggleButton");
-const cartDisplaySection = document.getElementById("cartDisplay");
 
 //Toggle add to cart section.
 cartButton.addEventListener("click", () => {
   cartDisplaySection.classList.toggle("hidden");
 });
+
+//Events: Display books.
+document.addEventListener("DOMContentLoaded", UI.displayCartItems);
 
 // display the list on the load up.
 const displayGroceryItems = () => {
@@ -167,6 +205,11 @@ const displayGroceryItems = () => {
       );
 
       const newCartItem = new CartItems(image, name, price, quantity);
+
+      // Display cart in the UI.
+      UI.displayCartItemsInUI(newCartItem);
+
+      // Adding the value in the localStorage.
       LocalStorage.setCartItems(newCartItem);
     });
   }
