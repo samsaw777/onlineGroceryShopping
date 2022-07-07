@@ -36,6 +36,30 @@ class CartItems {
   }
 }
 
+//Local storage class will go here.
+class LocalStorage {
+  static getCartItems() {
+    let items;
+
+    // check if LocalStorage is empty or not.
+    if (localStorage.getItem("cartItems") == null) {
+      items = [];
+    } else {
+      items = JSON.parse(localStorage.getItems("cartItems"));
+    }
+
+    return items;
+  }
+
+  static setCartItems(item) {
+    const cartItems = LocalStorage.getCartItems();
+
+    cartItems.push(item);
+
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }
+}
+
 // get the elements using ID.
 const groceryItems = document.getElementById("groceryItems");
 const cartButton = document.getElementById("cartToggleButton");
@@ -50,7 +74,7 @@ cartButton.addEventListener("click", () => {
 const displayGroceryItems = () => {
   groceryItemsList.forEach((item, index) => {
     groceryItems.innerHTML += `<div class="flex flex-col broder border-2 border-gray-200">
-        <img src="${item.url}" class="object-fit h-72 w-full p-10 bg-gray-200"/>
+        <img src="${item.url}" class="object-fit h-72 w-full p-10 bg-gray-200 itemImage"/>
         <div class="flex flex-col gap-2 items-center py-5">
             <div class="text-2xl font-bold name">${item.itemName}</div>
             <div class="text-green-500 font-bold text-xl price">Rs. ${item.price}</div>
@@ -90,6 +114,7 @@ const displayGroceryItems = () => {
   const itemPrice = document.getElementsByClassName("price");
   const itemName = document.getElementsByClassName("name");
   const itemQuantity = document.getElementsByClassName("quantity");
+  const itemImage = document.getElementsByClassName("itemImage");
 
   //looping through the increment buttons in the API.
   for (
@@ -134,15 +159,20 @@ const displayGroceryItems = () => {
   //adding items to the carts.
   for (let addToCart = 0; addToCart < addToCartButton.length; addToCart++) {
     addToCartButton[addToCart].addEventListener("click", () => {
+      const image = itemImage[addToCart].src;
       const name = itemName[addToCart].textContent;
-      const quantity = itemQuantity[addToCart].textContent;
+      const quantity = parseInt(itemQuantity[addToCart].textContent);
       const price = parseInt(
         itemPrice[addToCart].textContent.replace("Rs.", "")
       );
 
-      console.log(name, price, quantity);
+      const newCartItem = new CartItems(image, name, price, quantity);
+      LocalStorage.setCartItems(newCartItem);
     });
   }
 };
 
 displayGroceryItems();
+
+const item = LocalStorage.getCartItems();
+console.log(item);
