@@ -57,12 +57,14 @@ class UI {
     const div = document.createElement("div");
 
     div.innerHTML = `
-      <div class="flex gap-3">
-        <img src="${cartItem.itemImage}" class="h-[100px] w-[100px] object-fit" />
-        <div class="w-full mx-2">
+      <div class="flex gap-3 p-2">
+        <img src="${cartItem.itemImage}" class="h-[100px] w-[100px] lg:h-[200px] lg:w-[200px] object-fit" />
+        <div class="flex flex-col mx-2 justify-between">
+        <div>
           <div>${cartItem.itemName}</div>
           <div>${cartItem.itemPrice}</div>
-          <button class="py-1 px-2 rounded-lg bg-orange-400">Order Now</button>
+        </div>  
+          <button class="py-1 px-2 rounded-lg font-bold bg-orange-400">Order Now</button>
         </div>
       </div>
     `;
