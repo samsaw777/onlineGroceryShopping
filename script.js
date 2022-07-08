@@ -58,12 +58,11 @@ class UI {
 
     div.innerHTML = `
       <div class="flex gap-3">
-        <img src="${
-          cartItem.itemImage
-        }" class="h-[100px] w-[100px] object-fit" />
-        <div>
+        <img src="${cartItem.itemImage}" class="h-[100px] w-[100px] object-fit" />
+        <div class="w-full mx-2">
           <div>${cartItem.itemName}</div>
-          <div>${cartItem.itemPrice * cartItem.itemQuantity}</div>
+          <div>${cartItem.itemPrice}</div>
+          <button class="py-1 px-2 rounded-lg bg-orange-400">Order Now</button>
         </div>
       </div>
     `;
