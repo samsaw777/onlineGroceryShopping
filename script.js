@@ -27,8 +27,8 @@ const groceryItemsList = [
 ];
 
 const cartDisplaySection = document.getElementById("cartDisplay");
-const itemsCount = document.getElementById("cartItemsLength");
-const itemsCountValue = parseInt(itemsCount.textContent);
+let itemsCount = document.getElementById("cartItemsLength");
+let itemsCountValue = parseInt(itemsCount.textContent);
 
 //creating the cart items class.
 class CartItems {
@@ -57,7 +57,7 @@ class UI {
     const div = document.createElement("div");
 
     div.innerHTML = `
-      <div class="flex gap-3 p-2">
+      <div class="flex gap-3 p-2 mt-2">
         <img src="${cartItem.itemImage}" class="h-[100px] w-[100px] lg:h-[150px] lg:w-[150px] object-fit" />
         <div class="flex flex-col mx-2 justify-between w-full">
         <div class="flex flex-col gap-1">
@@ -69,12 +69,16 @@ class UI {
               </svg>
             </div>
           </div>
-          <div>
+          <div class="flex flex-col gap-3">
             <div class="text-lg font-bold">Rs. ${cartItem.itemPrice}</div>
-            <div>Here the increment value will come.</div>
+            <div class="flex gap-4 items-center">
+              <button class="decrementButton px-4 font-bold py-1 bg-gray-100">-</button>
+              <div class="quantity">${cartItem.itemQuantity}</div>
+              <button class="incrementButton px-4 font-bold py-1 bg-gray-100">+</button>
+            </div>
           </div>
         </div>
-          <button class="py-2 px-4 rounded-lg font-bold bg-orange-400 w-fit">Order Now</button>
+          <button class="py-2 px-4 rounded-lg font-bold bg-orange-400 w-fit mt-4">Order Now</button>
         </div>
       </div>
     `;
@@ -96,6 +100,12 @@ class LocalStorage {
     }
 
     return items;
+  }
+
+  static getCartItemLength() {
+    const cartItems = LocalStorage.getCartItems();
+
+    return cartItems.length++;
   }
 
   static setCartItems(item) {
@@ -220,13 +230,10 @@ const displayGroceryItems = () => {
       // Display cart in the UI.
       UI.displayCartItemsInUI(newCartItem);
 
-      // Adding the value in the localStorage.
+      //Adding the value in the localStorage.
       LocalStorage.setCartItems(newCartItem);
     });
   }
 };
 
 displayGroceryItems();
-
-const item = LocalStorage.getCartItems();
-console.log(item);
