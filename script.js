@@ -163,6 +163,12 @@ const displayGroceryItems = () => {
     return quantity;
   }
 
+  // increment cart item length.
+  function incrementCartItem(itemsLength) {
+    itemsLength++;
+    return itemsLength;
+  }
+
   const incrementQuantityButton =
     document.getElementsByClassName("incrementButton");
 
@@ -229,6 +235,10 @@ const displayGroceryItems = () => {
 
       // Display cart in the UI.
       UI.displayCartItemsInUI(newCartItem);
+
+      const itemsLength = incrementCartItem(parseInt(itemsCount.textContent));
+
+      itemsCount.textContent = itemsLength;
 
       //Adding the value in the localStorage.
       LocalStorage.setCartItems(newCartItem);
