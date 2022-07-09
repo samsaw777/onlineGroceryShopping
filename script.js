@@ -58,13 +58,23 @@ class UI {
 
     div.innerHTML = `
       <div class="flex gap-3 p-2">
-        <img src="${cartItem.itemImage}" class="h-[100px] w-[100px] lg:h-[200px] lg:w-[200px] object-fit" />
-        <div class="flex flex-col mx-2 justify-between">
-        <div>
-          <div>${cartItem.itemName}</div>
-          <div>${cartItem.itemPrice}</div>
-        </div>  
-          <button class="py-1 px-2 rounded-lg font-bold bg-orange-400">Order Now</button>
+        <img src="${cartItem.itemImage}" class="h-[100px] w-[100px] lg:h-[150px] lg:w-[150px] object-fit" />
+        <div class="flex flex-col mx-2 justify-between w-full">
+        <div class="flex flex-col gap-1">
+          <div class="flex justify-between items-center">
+            <div class="text-xl">${cartItem.itemName}</div>
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-900 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </div>
+          </div>
+          <div>
+            <div class="text-lg font-bold">Rs. ${cartItem.itemPrice}</div>
+            <div>Here the increment value will come.</div>
+          </div>
+        </div>
+          <button class="py-2 px-4 rounded-lg font-bold bg-orange-400 w-fit">Order Now</button>
         </div>
       </div>
     `;
